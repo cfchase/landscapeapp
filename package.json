@@ -1,12 +1,13 @@
 {
-  "name": "interactive-landscape",
-  "version": "1.0.296",
+  "name": "@cfchase/interactive-landscape",
+  "version": "0.0.1",
   "description": "Visualization tool for building interactive landscapes",
   "engines": {
     "npm": ">=3",
     "node": ">= 10.5"
   },
   "scripts": {
+    "s2i-build": "npm run prebuild && npm run quick-build",
     "autocrop-images": "babel-node tools/autocropImages",
     "open:src": "npm run yaml2json && babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
@@ -179,7 +180,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/cncf/landscapeapp"
+    "url": "https://github.com/cfchase/landscapeapp"
   },
   "jest": {
     "haste": {
