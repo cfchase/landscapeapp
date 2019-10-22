@@ -21,6 +21,7 @@ export const initialState = {
   initialUrlHandled: false,
   filters: {
     relation: [],
+    status: [],
     stars: null,
     license: [],
     marketCap: null,
@@ -32,7 +33,7 @@ export const initialState = {
     googlebot: null,
     parents: [],
   },
-  grouping: 'relation',
+  grouping: 'no',
   sortField: 'name',
   sortDirection: 'asc',
   selectedItemId: null,

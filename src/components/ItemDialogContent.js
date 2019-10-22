@@ -208,38 +208,7 @@ const ItemDialogContent = ({itemInfo, isLandscape, setIsLandscape}) => {
                       </div>
                     ) : null;
 
-  const headquartersElement =  itemInfo.headquarters && itemInfo.headquarters !== 'N/A' && (
-    <div className="product-property row">
-      <div className="product-property-name col col-40">Headquarters</div>
-      <div className="product-property-value tight-col col-60"><InternalLink to={filtersToUrl({grouping: 'headquarters', filters:{headquarters:itemInfo.headquarters}})}>{itemInfo.headquarters}</InternalLink></div>
-    </div>
-  );
-  const amountElement = Number.isInteger(itemInfo.amount) && (
-    <div className="product-property row">
-      <div className="product-property-name col col-40">{itemInfo.amountKind === 'funding' ? 'Funding' : 'Market Cap'}</div>
-      {  itemInfo.amountKind === 'funding' &&
-          <div className="product-property-value tight-col col-60">
-            <OutboundLink
-              target="_blank"
-              eventLabel={itemInfo.crunchbase + '#section-funding-rounds'}
-              to={itemInfo.crunchbase + '#section-funding-rounds'}
-            >{'$' + millify(itemInfo.amount)}
-            </OutboundLink>
-          </div>
-      }
-      { itemInfo.amountKind !== 'funding' &&
-          <div className="product-property-value tight-col col-60">
-            <OutboundLink
-              target="_blank"
-              eventLabel={'https://finance.yahoo.com/quote/' + itemInfo.yahoo_finance_data.effective_ticker}
-              to={'https://finance.yahoo.com/quote/' + itemInfo.yahoo_finance_data.effective_ticker}
-            >{'$' + millify(itemInfo.amount)}
-            </OutboundLink>
-          </div>
-      }
-    </div>
-  );
-  const tickerElement = itemInfo.ticker && (
+   const tickerElement = itemInfo.ticker && (
     <div className="product-property row">
       <div className="product-property-name col col-40">Ticker</div>
       <div className="product-property-value tight-col col-60">
@@ -290,7 +259,7 @@ const ItemDialogContent = ({itemInfo, isLandscape, setIsLandscape}) => {
               <div className="product-main">
                 { !isGoogle && <React.Fragment>
                     <div className="product-name">{itemInfo.name}</div>
-                    <div className="product-parent"><InternalLink to={linkToOrganization}><span>{itemInfo.organization}</span>{memberTag(itemInfo)}</InternalLink></div>
+                    <div className="product-parent">{itemInfo.organization}</div>
                     <div className="product-category">{itemCategory(itemInfo.landscape)}</div>
                     <div className="product-description">{itemInfo.description}</div>
                   </React.Fragment>
@@ -298,7 +267,7 @@ const ItemDialogContent = ({itemInfo, isLandscape, setIsLandscape}) => {
                 { isGoogle && <React.Fragment>
                     <div className="product-name">{itemInfo.name}</div>
                     <div className="product-description">{itemInfo.description}</div>
-                    <div className="product-parent"><InternalLink to={linkToOrganization}>{itemInfo.organization}</InternalLink></div>
+                    <div className="product-parent">{itemInfo.organization}</div>
                     <div className="product-category">{itemCategory(itemInfo.landscape)}</div>
                   </React.Fragment>
                 }
@@ -312,6 +281,14 @@ const ItemDialogContent = ({itemInfo, isLandscape, setIsLandscape}) => {
                     </OutboundLink>
                   </div>
                 </div>
+                {itemInfo.components &&
+                <div className="product-property row">
+                  <div className="product-property-name col col-20">Components</div>
+                  <div className="product-property-value product-components col col-80">
+                    {itemInfo.components}
+                  </div>
+                </div>
+                }
                 {itemInfo.repo_url &&
                 <div className="product-property row">
                   <div className="product-property-name col col-20">Repository</div>
@@ -334,16 +311,6 @@ const ItemDialogContent = ({itemInfo, isLandscape, setIsLandscape}) => {
                   </div>
                 </div>
                 }
-                {itemInfo.crunchbase &&
-                <div className="product-property row">
-                  <div className="product-property-name col col-20">Crunchbase</div>
-                  <div className="product-property-value col col-80">
-                    <OutboundLink eventLabel={itemInfo.crunchbase} to={itemInfo.crunchbase} target="_blank">
-                      {shortenUrl(itemInfo.crunchbase)}
-                    </OutboundLink>
-                  </div>
-                </div>
-                }
                 {itemInfo.crunchbaseData && itemInfo.crunchbaseData.linkedin &&
                 <div className="product-property row">
                   <div className="product-property-name col col-20">LinkedIn</div>
@@ -362,17 +329,13 @@ const ItemDialogContent = ({itemInfo, isLandscape, setIsLandscape}) => {
                     { latestCommitDateElement }
                     { contributorsCountElement }
                     { releaseDateElement }
-                    { headquartersElement }
                     { crunchbaseEmployeesElement }
-                    { amountElement }
                     { tickerElement }
                   </div> }
                   { !isMobile && <div className="col col-50">
                     { twitterElement }
                     { firstCommitDateElement }
                     { contributorsCountElement }
-                    { headquartersElement }
-                    { amountElement }
                     { tickerElement }
                   </div>
                   }

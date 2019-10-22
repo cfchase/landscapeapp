@@ -36,9 +36,11 @@ export const getFilteredItems = createSelector(
     var filterByBestPractices = filterFn({field: 'bestPracticeBadgeId', filters});
     var filterByEnduser = filterFn({field: 'enduser', filters});
     var filterByParent = filterFn({field: 'parents', filters});
-    return data.filter(function(x) {
-      return filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByLandscape(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x);
+    var filterByStatus = filterFn({field: 'status', filters});
+    let filteredData = data.filter(function(x) {
+      return filterByStatus(x) && filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByLandscape(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x);
     });
+    return filteredData;
   }
 );
 
@@ -77,9 +79,12 @@ const getFilteredItemsForBigPicture = createSelector(
     var filterByBestPractices = filterFn({field: 'bestPracticeBadgeId', filters});
     var filterByEnduser = filterFn({field: 'enduser', filters});
     var filterByParent = filterFn({field: 'parents', filters});
-    return addExtraFields(data.filter(function(x) {
-      return filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x);
+    var filterByStatus = filterFn({field: 'status', filters});
+    let filteredData = addExtraFields(data.filter(function(x) {
+      return filterByStatus(x) && filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x);
     }));
+
+    return filteredData;
   }
 );
 

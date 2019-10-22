@@ -5,7 +5,9 @@ import { createBrowserHistory } from 'history';
 // 'routerMiddleware': the new way of storing route changes with redux middleware since rrV4.
 import { routerMiddleware } from 'connected-react-router';
 import rootReducerFn from '../reducers';
-export const history = createBrowserHistory();
+export const history = createBrowserHistory(
+  {basename: window.landscapeBasename || '/'}
+);
 function configureStoreProd(initialState) {
   const reactRouterMiddleware = routerMiddleware(history);
   const middlewares = [
