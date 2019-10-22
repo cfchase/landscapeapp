@@ -74,8 +74,45 @@ const relationField = (function() {
 
 })();
 
+
+function buildValueList(values) {
+  let statusList = [];
+
+  values.forEach(topLevelItem => {
+    let children = topLevelItem.children || [];
+
+    statusList.push({
+      ...topLevelItem,
+      level: 1,
+      url: topLevelItem.url || topLevelItem.id,
+      children: children.map(child => child.id)
+    });
+
+    children.forEach(child => {
+      statusList.push({
+        ...child,
+        level: 2,
+        parentId: topLevelItem.id,
+        url: child.url || child.id,
+        children: []
+      })
+    })
+  });
+
+  return statusList;
+}
+
+const statusField = {
+  id: 'status',
+  label: settings.status.label,
+  url: settings.status.url,
+  isArray: true,
+  values: buildValueList(settings.status.values)
+};
+
 const fields = {
   relation: relationField,
+  status: statusField,
   stars: {
     id: 'stars',
     label: 'Stars',
@@ -323,6 +360,15 @@ export function filterFn({field, filters}) {
       return true;
     }
     if (_.isArray(filter)) {
+      if (_.isEmpty(value)) {
+        return filter.indexOf(false) !== -1;
+      }
+
+      if (_.isArray(value)) {
+        let found =_.find(value, valueItem => filter.indexOf(valueItem) !== -1);
+        return !!found;
+      }
+
       return filter.indexOf(value) !== -1;
     } else {
       return value === filter;

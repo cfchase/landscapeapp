@@ -22,6 +22,7 @@ export const initialState = {
   initialUrlHandled: false,
   filters: {
     relation: [],
+    status: [],
     stars: null,
     license: [],
     marketCap: null,
@@ -34,7 +35,7 @@ export const initialState = {
     language: undefined, // null means no language
     parents: [],
   },
-  grouping: 'relation',
+  grouping: 'no',
   sortField: 'name',
   sortDirection: 'asc',
   selectedItemId: null,

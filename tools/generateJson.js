@@ -156,7 +156,7 @@ async function main () {
         return null;
       };
       const getLicense = function() {
-        if ((node.hasOwnProperty('open_source') && !node.open_source) || !node.repo_url) {
+        if (!node.open_source && !node.repo_url) {
           return 'NotOpenSource';
         }
 
@@ -218,7 +218,7 @@ async function main () {
         twitter: getTwitter(),
         latestTweetDate: formatDate((node.twitter_data || {}).latest_tweet_date),
         description: getDescription(),
-        organization: (node.crunchbase_data || {}).name || node.organization,
+        organization: node.organization || (node.crunchbase_data || {}).name ,
         crunchbaseData: node.crunchbase_data,
         path: parts.join(' / '),
         landscape: parts.join(' / '),

@@ -27,8 +27,9 @@ export const getFilteredItems = createSelector(
     var filterByEnduser = filterFn({field: 'enduser', filters});
     var filterByParent = filterFn({field: 'parents', filters});
     var filterByLanguage = filterFn({field: 'language', filters});
+    var filterByStatus = filterFn({field: 'status', filters});
     return data.filter(function(x) {
-      return filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByLandscape(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x) && filterByLanguage(x);
+      return filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByLandscape(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x) && filterByLanguage(x) && filterByStatus(x);
     });
   }
 );
@@ -59,8 +60,9 @@ const getFilteredItemsForBigPicture = createSelector(
     var filterByEnduser = filterFn({field: 'enduser', filters});
     var filterByParent = filterFn({field: 'parents', filters});
     var filterByLanguage = filterFn({field: 'language', filters});
+    var filterByStatus = filterFn({field: 'status', filters});
     return addExtraFields(data.filter(function(x) {
-      return filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x) && filterByLanguage(x);
+      return filterHostedProject(x) && filterByLicense(x) && filterByOrganization(x) && filterByHeadquarters(x) && filterByBestPractices(x) && filterByEnduser(x) && filterByParent(x) && filterByLanguage(x) && filterByStatus(x);
     }));
   }
 );

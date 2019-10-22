@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 import ProjectFilterContainer from './ProjectFilterContainer';
+import IsvStatusFilterContainer from './IsvStatusFilterContainer';
 import LicenseFilterContainer from './LicenseFilterContainer';
 import OrganizationFilterContainer from './OrganizationFilterContainer';
 import HeadquartersFilterContainer from './HeadquartersFilterContainer';
@@ -19,10 +20,17 @@ const Filters = () => {
         </FormControl>
       </FormGroup>
 
+      {/*<FormGroup row>*/}
+      {/*  <FormControl component="fieldset">*/}
+      {/*    <FormLabel component="legend">{fields.relation.label}</FormLabel>*/}
+      {/*    <ProjectFilterContainer/>*/}
+      {/*  </FormControl>*/}
+      {/*</FormGroup>*/}
+
       <FormGroup row>
         <FormControl component="fieldset">
-          <FormLabel component="legend">{fields.relation.label}</FormLabel>
-          <ProjectFilterContainer/>
+          <FormLabel component="legend">{fields.status.label}</FormLabel>
+          <IsvStatusFilterContainer/>
         </FormControl>
       </FormGroup>
 
@@ -40,12 +48,12 @@ const Filters = () => {
         </FormControl>
       </FormGroup>
 
-      <FormGroup row>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">{fields.headquarters.label}</FormLabel>
-          <HeadquartersFilterContainer />
-        </FormControl>
-      </FormGroup>
+    {/*<FormGroup row>*/}
+      {/*  <FormControl component="fieldset">*/}
+      {/*    <FormLabel component="legend">{fields.headquarters.label}</FormLabel>*/}
+      {/*    <HeadquartersFilterContainer />*/}
+      {/*  </FormControl>*/}
+      {/*</FormGroup>*/}
 
 
 
