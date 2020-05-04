@@ -33,7 +33,11 @@ async function main() {
     'allow_duplicate_repo',
     'components',
     'organization',
-    'status'
+    'status',
+    'frameworks',
+    'frameworks_filter',
+    'use_cases',
+    'use_cases_filter'
   ];
 
   const addKeyError = (title, key) => {

@@ -2,13 +2,25 @@ import React from 'react';
 import { pure } from 'recompose';
 import _ from 'lodash'
 import InternalLink from '../InternalLink';
+import { withStyles } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
+import Tooltip from '@material-ui/core/Tooltip';
 import fields from '../../types/fields';
 import settings from 'project/settings.yml'
 import { getContrastRatio } from "@material-ui/core/styles";
 
 const itemWidth = 36;
 const itemHeight = 32;
+
+const ImageTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#ffffff',
+    color: '#38404a',
+    maxWidth: 180,
+    fontSize:'0.9rem',
+    border: '1px solid #787878',
+  },
+}))(Tooltip);
 
 const isLargeFn = function(x) {
   const relationInfo = _.find(fields.relation.values, {id: x.relation});
@@ -25,7 +37,7 @@ const Item = (function({zoom, item, x, y, isLarge, onSelectItem}) {
   }
   const k = 1;
   const isMember = item.category === settings.global.membership;
-  return <img style={{
+  const elem = <img style={{
       cursor: 'pointer',
       position: 'absolute',
       left: (itemWidth * x + 2) * zoom,
@@ -44,6 +56,8 @@ const Item = (function({zoom, item, x, y, isLarge, onSelectItem}) {
     onClick={ () => onSelectItem(item.id)}
     alt={item.name}
   />
+
+  return <ImageTooltip title={item.name.replace(/\(.*\)/gi, '')}>{elem}</ImageTooltip>;
 })
 
 const LargeItem = (function({zoom, item, x, y, onSelectItem}) {
@@ -56,7 +70,7 @@ const LargeItem = (function({zoom, item, x, y, onSelectItem}) {
   const label = relationInfo.big_picture_label;
   const isMember = item.category === settings.global.membership;
 
-  return <div style={{
+  const elem = <div style={{
     cursor: 'pointer',
     position: 'absolute',
     background: isMember ? '' : item.oss ? '' : '#eee',
@@ -78,6 +92,8 @@ const LargeItem = (function({zoom, item, x, y, onSelectItem}) {
     {label}
   </div>
   </div>;
+
+  return <ImageTooltip title={item.name.replace(/\(.*\)/gi, '')}>{elem}</ImageTooltip>;
 })
 
 const HorizontalSubcategory = (function({zoom, subcategory, rows, onSelectItem, parentHeight, xRatio }) {

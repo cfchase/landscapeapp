@@ -76,12 +76,12 @@ const relationField = (function() {
 
 
 function buildValueList(values) {
-  let statusList = [];
+  let valueList = [];
 
   values.forEach(topLevelItem => {
     let children = topLevelItem.children || [];
 
-    statusList.push({
+    valueList.push({
       ...topLevelItem,
       level: 1,
       url: topLevelItem.url || topLevelItem.id,
@@ -89,7 +89,7 @@ function buildValueList(values) {
     });
 
     children.forEach(child => {
-      statusList.push({
+      valueList.push({
         ...child,
         level: 2,
         parentId: topLevelItem.id,
@@ -99,7 +99,7 @@ function buildValueList(values) {
     })
   });
 
-  return statusList;
+  return valueList;
 }
 
 const statusField = {
@@ -110,9 +110,27 @@ const statusField = {
   values: buildValueList(settings.status.values)
 };
 
+const frameworksField = {
+  id: 'frameworks',
+  label: settings.frameworks.label,
+  url: settings.frameworks.url,
+  isArray: true,
+  values: buildValueList(settings.frameworks.values)
+};
+
+const useCasesField = {
+  id: 'use_cases',
+  label: settings.use_cases.label,
+  url: settings.use_cases.url,
+  isArray: true,
+  values: buildValueList(settings.use_cases.values)
+};
+
 const fields = {
   relation: relationField,
   status: statusField,
+  frameworks_filter: frameworksField,
+  use_cases_filter: useCasesField,
   stars: {
     id: 'stars',
     label: 'Stars',

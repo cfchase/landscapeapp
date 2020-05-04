@@ -495,6 +495,22 @@ const ItemDialogContent = ({itemInfo, isLandscape, setIsLandscape}) => {
                   </div>
                 </div>
                 }
+                {itemInfo.frameworks &&
+                <div className="product-property row">
+                  <div className="product-property-name col col-20">Frameworks</div>
+                  <div className="product-property-value product-components col col-80">
+                    {itemInfo.frameworks}
+                  </div>
+                </div>
+                }
+                {itemInfo.use_cases &&
+                <div className="product-property row">
+                  <div className="product-property-name col col-20">Use Cases</div>
+                  <div className="product-property-value product-components col col-80">
+                    {itemInfo.use_cases}
+                  </div>
+                </div>
+                }
                 {itemInfo.repo_url &&
                 <div className="product-property row">
                   <div className="product-property-name col col-20">Repository</div>

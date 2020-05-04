@@ -6,6 +6,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 import ProjectFilterContainer from './ProjectFilterContainer';
 import IsvStatusFilterContainer from './IsvStatusFilterContainer';
+import FrameworksFilterContainer from './FrameworksFilterContainer';
+import UseCasesFilterContainer from './UseCasesFilterContainer';
 import LicenseFilterContainer from './LicenseFilterContainer';
 import OrganizationFilterContainer from './OrganizationFilterContainer';
 import HeadquartersFilterContainer from './HeadquartersFilterContainer';
@@ -31,6 +33,20 @@ const Filters = () => {
         <FormControl component="fieldset">
           <FormLabel component="legend">{fields.status.label}</FormLabel>
           <IsvStatusFilterContainer/>
+        </FormControl>
+      </FormGroup>
+
+      <FormGroup row>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">{fields.frameworks_filter.label}</FormLabel>
+          <FrameworksFilterContainer/>
+        </FormControl>
+      </FormGroup>
+
+      <FormGroup row>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">{fields.use_cases_filter.label}</FormLabel>
+          <UseCasesFilterContainer/>
         </FormControl>
       </FormGroup>
 

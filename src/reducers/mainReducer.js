@@ -23,6 +23,8 @@ export const initialState = {
   filters: {
     relation: [],
     status: [],
+    frameworks_filter: [],
+    use_cases_filter: [],
     stars: null,
     license: [],
     marketCap: null,
