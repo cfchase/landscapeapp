@@ -120,18 +120,19 @@ export async function fetchGithubEntries({cache, preferCache}) {
       const releaseDate = await getReleaseDate({repo: repoName});
       const releaseLink = releaseDate && `${url}/releases`;
       const getContributorsCount = async function() {
-        var response = await rp({
-          uri: `${url}/contributors_size`,
-          followRedirect: true,
-          timeout: 30 * 1000,
-          simple: true
+        const apiUrl = `https://api.github.com/repos/${repoName}/contributors?access_token=${process.env.GITHUB_KEY}&per_page=1`;
+        const response = await rp({
+          url: apiUrl,
+          json: true,
+          headers: {
+            'User-Agent': 'landscapeapp updater'
+          },
+          resolveWithFullResponse: true
         });
-        const dom = new JSDOM(response);
-        const doc = dom.window.document;
-        var element = doc.querySelector('.num');
-        var count = element.textContent.replace(/[^\d]/g, '').trim();
-        return parseInt(count);
-      };
+        const link = response.headers.link;
+        const strCount = link.match(/page=(\d+)>; rel="last"/)[1]
+        return parseInt(strCount, 10);
+      }
       const contributorsCount = await getContributorsCount();
       const contributorsLink = `${url}/graphs/contributors`;
       // console.info(contributorsCount, contributorsLink);
